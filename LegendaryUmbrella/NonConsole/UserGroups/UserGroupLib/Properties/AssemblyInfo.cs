@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ConsoleLib")]
-[assembly: AssemblyDescription("Library for LegendaryUmbrella Console Apps")]
+[assembly: AssemblyTitle("UserGroupLib")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Justin Krejcha")]
-[assembly: AssemblyProduct("ConsoleLib")]
-[assembly: AssemblyCopyright("Copyright © Justin Krejcha 2017")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("UserGroupLib")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("765ddb55-de71-432f-9704-64f1b534a69b")]
+[assembly: Guid("1817b783-5a46-47d6-a750-033ecbbe15b9")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -17,7 +17,7 @@ namespace GuestServices
 	{
 		private readonly byte[] WarningMsgBytes = Encoding.UTF8.GetBytes(Properties.Resources.WarningMsg);
         private readonly string[] NoExec = new String[] { "taskmgr", "regedit", "reg", "ftp", "telnet", "driverlist",
-														  "virtualbox", "cpuz", "Task Explorer-x64", "Task Explorer-x64",
+														  "virtualbox", "cpuz", "Task Explorer", "Task Explorer-x64",
 														  "cmd", "takeown"};
 		private Dictionary<int, int> FailedPIDs = new Dictionary<int, int>();
 
