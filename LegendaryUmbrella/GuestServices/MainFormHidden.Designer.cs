@@ -38,7 +38,6 @@
 			// 
 			this.tmrProcessCheck.Enabled = global::GuestServices.Properties.Settings.Default.Restrictions;
 			this.tmrProcessCheck.Interval = 1500;
-			this.tmrProcessCheck.Tick += new System.EventHandler(this.tmrProcessCheck_Tick);
 			// 
 			// fswNoteWatcher
 			// 
@@ -48,9 +47,6 @@
             | System.IO.NotifyFilters.Attributes) 
             | System.IO.NotifyFilters.LastWrite)));
 			this.fswNoteWatcher.SynchronizingObject = this;
-			this.fswNoteWatcher.Changed += new System.IO.FileSystemEventHandler(this.fswNoteWatcher_Changed);
-			this.fswNoteWatcher.Deleted += new System.IO.FileSystemEventHandler(this.fswNoteWatcher_Deleted);
-			this.fswNoteWatcher.Renamed += new System.IO.RenamedEventHandler(this.fswNoteWatcher_Renamed);
 			// 
 			// MainFormHidden
 			// 
@@ -66,7 +62,6 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.TransparencyKey = System.Drawing.SystemColors.Control;
 			this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-			this.Load += new System.EventHandler(this.MainFormHidden_Load);
 			((System.ComponentModel.ISupportInitialize)(this.fswNoteWatcher)).EndInit();
 			this.ResumeLayout(false);
 

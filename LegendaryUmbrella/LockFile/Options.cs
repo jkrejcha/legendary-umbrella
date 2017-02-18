@@ -5,7 +5,6 @@ namespace LegendaryUmbrella.LockFile
 {
 	internal class Options
 	{
-		private string[] args;
 
 		public Options(string[] args)
 		{
@@ -13,12 +12,13 @@ namespace LegendaryUmbrella.LockFile
 			String firstSwitch = args[0];
 			if (!(firstSwitch.StartsWith("-") || firstSwitch.StartsWith("/")))
 			{
+				System.Diagnostics.Debug.WriteLine("seems to not be a flag, skipping parsing");
 				SharingType = FileShare.Read;
 				FileName = ParseFileNameFromCommandLine(args, 0);
 			}
 			else
 			{
-				SharingType = ParseSharingTypeFromCommandLine(firstSwitch.Substring(1));
+				SharingType = ParseSharingTypeFromCommandLine(firstSwitch.Replace("-", ""));
 				if (args.Length == 1) throw new ArgumentException();
 				FileName = ParseFileNameFromCommandLine(args, 1);
 			}
@@ -27,7 +27,8 @@ namespace LegendaryUmbrella.LockFile
 		private static String ParseFileNameFromCommandLine(String[] args, int position)
 		{
 			if (args.Length < position) throw new ArgumentException();
-
+			System.Diagnostics.Debug.WriteLine(args[position] + " is the value at position " + position);
+			return args[position];
 		}
 
 		private static FileShare ParseSharingTypeFromCommandLine(String commandLineSwitch)
