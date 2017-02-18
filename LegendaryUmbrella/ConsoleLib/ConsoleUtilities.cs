@@ -30,13 +30,28 @@ namespace LegendaryUmbrella.ConsoleLib
 				if (IsBooleanString(response, false)) return false;
 				hasLooped = true;
 			}
-			throw new Exception("User provided an invalid response");
+			throw new AggregateException("User provided an invalid response");
 		}
 
 		public static String PromptCurrentDirectory()
 		{
 			Console.Write(Environment.CurrentDirectory + ">");
 			return Console.ReadLine();
+		}
+
+		public static Win32Exception GetNativeException(Exception ex)
+		{
+			Contract.Requires<ArgumentNullException>(ex != null);
+			Exception e = ex.InnerException;
+			while (e != null)
+			{
+				if (e is Win32Exception)
+				{
+					return (Win32Exception)e;
+				}
+				e = e.InnerException;
+			}
+			return null;
 		}
 
 		public static String GetNativeErrorStringFromException(Exception ex)
@@ -59,6 +74,7 @@ namespace LegendaryUmbrella.ConsoleLib
 			{
 				if (cmp.Equals(str, StringComparison.InvariantCultureIgnoreCase)) return true;
 			}
+			return false;
 		}
 	}
 }

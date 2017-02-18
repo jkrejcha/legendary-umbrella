@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 
@@ -38,5 +39,53 @@ namespace LegendaryUmbrella.UserGroupLib
 			group.Name = name;
 			group.Save();
 		}
-    }
+
+		public static List<DirectoryEntry> GetAllComputersInNetwork()
+		{
+			List<DirectoryEntry> computerList = new List<DirectoryEntry>();
+			DirectoryEntry root = new DirectoryEntry("WinNT:");
+			foreach (DirectoryEntry computers in root.Children)
+			{
+				foreach (DirectoryEntry computer in computers.Children)
+				{
+					if (computer.Name != "Schema" && computer.SchemaClassName == "Computer")
+					{
+						computerList.Add(computer);
+					}
+				}
+			}
+			return computerList;
+		}
+
+		public static List<String> GetAllComputerNames()
+		{
+			List<String> list = new List<String>();
+			foreach (DirectoryEntry entry in GetAllComputersInNetwork())
+			{
+				list.Add(entry.Name);
+			}
+			return list;
+		}
+
+		public static void PrintShares()
+		{
+			Console.WriteLine("Local shares: ");
+			PrintAllShares(ShareCollection.LocalShares);
+			Console.WriteLine();
+			Console.WriteLine("Non-local shares:");
+			foreach (DirectoryEntry computer in GetAllComputersInNetwork())
+			{
+				PrintAllShares(ShareCollection.GetShares(computer.Name));
+			}
+		}
+
+		static void PrintAllShares(ShareCollection shares)
+		{
+			foreach (Share share in shares)
+			{
+				if (!share.IsFileSystem) continue;
+				Console.WriteLine(share.ToString());
+			}
+		}
+	}
 }
