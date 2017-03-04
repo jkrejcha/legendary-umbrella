@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Current Date and Time Utility")]
-[assembly: AssemblyDescription("Current Date and Time Utility")]
+[assembly: AssemblyTitle("FixExtensions")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Justin Krejcha")]
-[assembly: AssemblyProduct("Current Date and Time Utility")]
+[assembly: AssemblyProduct("FixExtensions")]
 [assembly: AssemblyCopyright("Copyright © Justin Krejcha 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a420204a-38b5-4a83-99a1-2a7a043a3b7f")]
+[assembly: Guid("056e672d-2141-4d5c-b700-9de00b250404")]
 
 // Version information for an assembly consists of the following four values:
 //

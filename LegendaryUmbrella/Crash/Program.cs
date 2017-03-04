@@ -8,7 +8,7 @@ namespace LegendaryUmbrella.NoLib.Crash
 	{
 		static void Main()
 		{
-			Environment.FailFast(null);
+			System.Runtime.InteropServices.Marshal.WriteByte(IntPtr.Zero, 0xFF);
 		}
 	}
 }

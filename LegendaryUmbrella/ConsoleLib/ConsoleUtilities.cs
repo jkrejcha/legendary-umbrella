@@ -67,8 +67,11 @@ namespace LegendaryUmbrella.ConsoleLib
 					first = false;
 				}
 			}
-			Console.WriteLine();
-			foreach (String str in CreateWrappedString(notes, notesMaxLine)) Console.WriteLine(str);
+			if (notes != null)
+			{
+				Console.WriteLine();
+				foreach (String str in CreateWrappedString(notes, notesMaxLine)) Console.WriteLine(str);
+			}
 			Console.WriteLine();
 		}
 
