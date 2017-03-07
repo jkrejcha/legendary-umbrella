@@ -15,6 +15,11 @@ namespace GPFix
 
 		private const String SoftwarePolicies = "Software\\Policies\\Microsoft\\Windows\\";
 
+		private const RegistryRights WriteAccess = RegistryRights.WriteKey | RegistryRights.SetValue;
+		private const RegistryRights ReadAccess = RegistryRights.ReadKey | RegistryRights.QueryValues;
+		private const RegistryRights WritePerms = RegistryRights.ChangePermissions;
+		private const RegistryRights ReadPerms = RegistryRights.ReadPermissions;
+
 		private static bool? PauseOnError;
         static void Main(string[] args)
 		{
@@ -49,8 +54,8 @@ namespace GPFix
 		private static void TryDisableGPUpdate()
 		{
 			Console.WriteLine("Attempting to disable Group Policy updates...");
-			Write(SoftwarePolicies + "System", "GroupPolicyRefreshTime", Int32.MaxValue);
-			Write(SoftwarePolicies + "System", "DisableBkGndGroupPolicy", 1);
+			Write(SoftwarePolicies + "System", "GroupPolicyRefreshTime", Int32.MaxValue, true, true, false);
+			Write(SoftwarePolicies + "System", "DisableBkGndGroupPolicy", 1, true, true, false);
 		}
 
 		private static void DisableKeys(String path, params String[] names)
@@ -71,13 +76,13 @@ namespace GPFix
 			RegistryRights permissionRights = RegistryRights.ChangePermissions | RegistryRights.ReadPermissions;
 			RegistryAccessRule everyoneWriteRule = new RegistryAccessRule(everyoneReference, RegistryRights.WriteKey | permissionRights, AccessControlType.Allow);
 
-			RegistryAccessRule noOneWriteRule = new RegistryAccessRule(everyoneReference, RegistryRights.WriteKey, AccessControlType.Deny);
+			RegistryAccessRule noOneWriteRule = new RegistryAccessRule(everyoneReference, WriteAccess, AccessControlType.Deny);
 			RegistryAccessRule noOneReadRule = new RegistryAccessRule(everyoneReference, RegistryRights.ReadKey, AccessControlType.Deny);
 
 			RegistryAccessRule noOneCantWriteRule = new RegistryAccessRule(everyoneReference, 0, AccessControlType.Deny);
 			try
 			{
-				key = key.OpenSubKey(path, RegistryKeyPermissionCheck.Default, RegistryRights.WriteKey | permissionRights);
+				key = key.OpenSubKey(path, RegistryKeyPermissionCheck.ReadWriteSubTree, WriteAccess | permissionRights);
 				if (AttemptToSetWriteBefore)
 				{
 					Console.WriteLine("Setting security...");
